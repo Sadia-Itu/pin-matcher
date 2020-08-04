@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+ 
+ 
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+                    <input class="form-control" id="randomPin" type="text">
+                    <button id="generatePin" class="generate-btn">Generate Pin</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-section half-width">
+            <form action="" name="form">
+                     
+                <input class="form-control" id="inputNumber" type="text" name="display">
+                
+                <div class="numbers">
+                    <div class="calc-body">
+                        <div class="calc-button-row">
+                        <div class="button" onclick="takePin(this.innerText)">7</div>
+                        <div class="button" onclick="takePin(this.innerText)">8</div>
+                        <div class="button" onclick="takePin(this.innerText)">9</div>
+                        </div>
+                        <div class="calc-button-row">
+                          <div class="button" onclick="takePin(this.innerText)">4</div>
+                          <div class="button" onclick="takePin(this.innerText)">5</div>
+                          <div class="button" onclick="takePin(this.innerText)">6</div>
+                        </div>
+                        <div class="calc-button-row">
+                          <div class="button" onclick="takePin(this.innerText)">1</div>
+                          <div class="button" onclick="takePin(this.innerText)">2</div>
+                          <div class="button" onclick="takePin(this.innerText)">3</div>
+                        </div>
+                        <div class="calc-button-row">
+                            <div class="button" onclick="back()"><</div>
+                            <div class="button" onclick="takePin(this.innerText)">0</div>
+                            <div class="button" onclick="clean()">C</div>
+                        </div>
+                        <div>
+                            <button type="submit" id="submitButton" class="submit-btn">Submit</button>
+                            <p class="action-left">3 try left</p>
+                        </div>
+                </div>
+            </div>
+        </div>
+            </form>
+        </div>
+        <div id="alarm" class="notify-section">
+            <p class="notify" id="wrongPin">❌If Pin don't Match, Please try again</p>
+           <p class="notify" id="pinMatched">✅if Pin Will Match... Congratulations!!<br>Secret door is opening for you.</p>
+        </div>
+    </div>
+    <script>
+
+         //    for randoms number generate
+    
+
+
+       document.getElementById("generatePin").addEventListener("click", function(){
+        var fourDigitsRandom = Math.floor(Math.random() * 9999 + 1000);
+        var fourDigit =document.getElementById("randomPin");
+        fourDigit.value=fourDigitsRandom;
+        hideNotifySection ();
+       });
+    
+    //  function for numbers  button
+
+
+    function takePin(number){
+       var showInput = document.getElementById("inputNumber");
+
+       showInput.value=showInput.value + number;  
+       
+
+    
+        
+     }
+
+     function hideNotifySection (){
+        document.getElementById("wrongPin").style.display = 'none';
+        document.getElementById("pinMatched").style.display = 'none'; 
+     }
+
+     //  for pin matched
+       
+        
+           
+     document.getElementById("submitButton").addEventListener("click" , function(){
+         
+          hideNotifySection();
+        
+              
+            
+           let generatePin = document.getElementById("randomPin").value;
+           let submitPin = document.getElementById("inputNumber").value;
+
+           if (generatePin == submitPin){
+            
+               
+               //document.getElementById("pinMatched").style.display = 'block'; 
+               alert("✅ Pin Matched... Secret door is opening for you");
+               
+               
+
+             
+           }
+           else {
+            //document.getElementById("wrongPin").style.display = 'block';
+            alert("❌ Pin Didn't Match, Please try again");
+            
+           }
+       })
+       
+
+
+    //   function for < or backspace button
+
+     function back(){
+         var expr = form.display.value;
+         form.display.value= expr.substring( 0, expr.length-1);
+         hideNotifySection ();
+     }
+
+
+    //  function for c or clean  button
+
+
+  function clean(){
+    form.display.value = '';
+    hideNotifySection ();
+  }
+
+
+   
+
+            
+     
+    </script>
+
+    
+
+</body>
+</html>
